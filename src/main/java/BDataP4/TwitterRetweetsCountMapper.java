@@ -10,7 +10,7 @@ import java.io.IOException;
 /**
  * Created by lsolorzano on 3/24/2017.
  */
-public class TwitterRetweetsCountMapper extends Mapper<LongWritable, Text, LongWritable, IntWritable> {
+public class TwitterRetweetsCountMapper extends Mapper<LongWritable, Text, LongWritable, Text> {
     @Override
     public void map(LongWritable key, Text value, Mapper.Context context) throws IOException, InterruptedException {
 
@@ -26,7 +26,7 @@ public class TwitterRetweetsCountMapper extends Mapper<LongWritable, Text, LongW
                 long originaltweetid = originalTweet.getId();
                 //long originaluserid = originalTweet.getUser().getId();
 
-                context.write(new Text(Long.toString(originaltweetid)), new IntWritable(1));
+                context.write(new Text(Long.toString(originaltweetid)), new Text(String.valueOf(status.getId())));
             }
 
         }
